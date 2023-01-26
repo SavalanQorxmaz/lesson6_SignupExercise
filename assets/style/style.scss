@@ -1,0 +1,33 @@
+
+* {
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+#signup {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: 500px;
+    margin: 50px auto auto auto;
+    padding: 20px;
+    border: 1px solid black;
+    background-color: #1b1b3f;
+    & * {
+        margin-top: 20px;
+    }
+
+    input {
+
+        padding: 5px;
+    };
+
+    #button {
+        padding: 5px;
+        color: white;
+        background-color: black;
+    }
+}
