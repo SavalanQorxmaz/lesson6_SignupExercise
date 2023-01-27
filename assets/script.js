@@ -39,17 +39,31 @@ function checkLength(element, len) {
 }
 
 // setirin qaydalara uygunlugunun yoxlanmasi funksiyasi
-function checkPasswordIsLegal(password){
-    if(!checkLength(password,8)){
-        errorMessage.innerHTML = "parol qisadir";
-        return false;
-    }else {
-         errorMessage.innerHTML = " ";
-         return true;
+function checkPasswordIsLegal(pass){
+    // let check = true;
+    if((pass.value.length > 7)&&(pass.value.search(/[a-z]/)>0)&&(pass.value.search(/[A-Z]/)>0)&&(pass.value.search(/[0-9]/)>0)){
+        console.log("qaydalara uygundur")
+        // check *= true;
+        pass.style.border = "2px solid rgb(3, 86, 26)";
+        errorMessage.innerHTML = "";
+        console.log(pass.value)
+        return true;
+
+    }
+    
+
+
+else{
+    console.log("qaydalara uygun deyil")
+    pass.style.border = "2px solid red";
+    errorMessage.innerHTML = "Parol qaydalara uygun deyil";
+    console.log(pass.value)
+    return false;
+}
 
     }
 
-}
+
 // setirleri eyniliyinin yoxlanmasi funksiyasi
 function checkPasswordIsSame(pas1, pas2){
   
@@ -82,6 +96,7 @@ password.onkeyup = () => {
         confirmPassword.readOnly = true;
 
     }
+  
     
    
 }
