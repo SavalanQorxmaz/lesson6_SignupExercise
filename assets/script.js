@@ -27,21 +27,21 @@ const allValueTrust =[false, false, false, false, false, false]
 let flag = true;
 
 // setir uzunlugunun yoxlanmasi
-function checkLength(element, len) {
-    if(element.value.length < len){
+// function checkLength(element, len) {
+//     if(element.value.length < len){
        
-        element.style.border = "2px solid red";
-        return false;
-    }else{
-        element.style.border = "2px solid rgb(3, 86, 26)";
-        return true;
-    }
-}
+//         element.style.border = "2px solid red";
+//         return false;
+//     }else{
+//         element.style.border = "2px solid rgb(3, 86, 26)";
+//         return true;
+//     }
+// }
 
 // setirin qaydalara uygunlugunun yoxlanmasi funksiyasi
 function checkPasswordIsLegal(pass){
     // let check = true;
-    if((pass.value.length > 7)&&(pass.value.search(/[a-z]/)>0)&&(pass.value.search(/[A-Z]/)>0)&&(pass.value.search(/[0-9]/)>0)){
+    if((pass.value.length > 7)&&(pass.value.search(/[a-z]/)>-1)&&(pass.value.search(/[A-Z]/)>-1)&&(pass.value.search(/[0-9]/)>-1)&&(pass.value.search(" ")<0)){
         console.log("qaydalara uygundur")
         // check *= true;
         pass.style.border = "2px solid rgb(3, 86, 26)";
@@ -94,12 +94,21 @@ password.onkeyup = () => {
     else{
         confirmPassword.value = "";
         confirmPassword.readOnly = true;
+        confirmPassword.style.border = "none";
 
     }
   
     
    
 }
+
+password.addEventListener("focusout", ()=>{
+    if(password.value.length == 0){
+        password.style.border = "none";
+        confirmPassword.style.border = "none";
+        errorMessage.innerHTML = "";
+    }
+})
 
 
 confirmPassword.onkeyup = () => {
@@ -115,6 +124,7 @@ confirmPassword.onkeyup = () => {
 
         let valueInput = val.value.trim();
         let valueInputArray =valueInput.split(" ");
+        console.log(valueInputArray.length, valueInput)
         let newValueInputArray = []
        if(valueInputArray.every((el)=>{
         return el.length>1
@@ -126,7 +136,13 @@ confirmPassword.onkeyup = () => {
            val.value = newValueInputArray.join(" ");
            val.style.border = "2px solid rgb(3, 86, 26)";
            errorMessage.innerHTML = "";
-    } else{
+    } 
+    else if(val.value.trim() == ""){
+        val.style.border = "none";
+        errorMessage.innerHTML = "";
+    }
+    
+    else{
     val.style.border = "2px solid red";
     errorMessage.innerHTML = "1 herfli ad olmaz";
 
